@@ -12,7 +12,8 @@ class ChecklistViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        ChecklistItem(text:"Finirlecoursd’iOS")
+        ChecklistItem(text:"MettreàjourXCode",checked:true)
     }
     
     
@@ -21,7 +22,7 @@ class ChecklistViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)-> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChecklistItem", for: indexPath)
-        cell.textLabel!.text = "TODO"
+        cell.textLabel!.text = "WE ARE HERE TO STEAL YOUR BEER"
         return cell
     }
     
