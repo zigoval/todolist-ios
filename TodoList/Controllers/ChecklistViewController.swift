@@ -11,12 +11,24 @@ import UIKit
 class ChecklistViewController: UITableViewController {
     
     var arrayCheckListItem = [ChecklistItem]()
-        //MARK: - Init
+    
+    static var documentDirectory : URL {
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    }
+    
+    static var dataFileUrl : URL {
+        return documentDirectory.appendingPathComponent("Checklists").appendingPathExtension("json")
+    }
+    
+    //MARK: - Init
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        arrayCheckListItem.append(ChecklistItem(text:"Finir le cours d’iOS"))
-        arrayCheckListItem.append(ChecklistItem(text:"Mettre à jour XCode",checked:true))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder : aDecoder)
+        loadChecklistItems()
     }
 
     //MARK: - Navigation
@@ -25,13 +37,12 @@ class ChecklistViewController: UITableViewController {
         if segue.identifier == "addItem"
         {
             let navDestVC = segue.destination as! UINavigationController
-            let destVC = navDestVC.topViewController as! AddItemViewController
+            let destVC = navDestVC.topViewController as! itemDetailViewController
             destVC.delegate = self
         } else if segue.identifier == "editItem"
         {
             let navDestVC = segue.destination as! UINavigationController
-            let destVC = navDestVC.topViewController as! AddItemViewController
-            
+            let destVC = navDestVC.topViewController as! itemDetailViewController
             destVC.itemToEdit = arrayCheckListItem[(tableView.indexPath(for: sender as! UITableViewCell)?.row)!]
             destVC.delegate = self
         }
@@ -60,6 +71,7 @@ class ChecklistViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         arrayCheckListItem.remove(at: indexPath.item)
         tableView.deleteRows(at: [indexPath], with: .automatic)
+        saveChecklistItems()
     }
     
     //MARK: - Configuration de la cellule
@@ -74,8 +86,32 @@ class ChecklistViewController: UITableViewController {
         let customCell = cell as! CheckListItemCell
         customCell.todoLabel.text = item.text
     }
+    //MARK: - Codable Protocol
     
-    //MARK: -
+    func saveChecklistItems(){
+        let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            do {
+                let data = try encoder.encode(arrayCheckListItem)
+                try data.write(to: ChecklistViewController.dataFileUrl)
+                print(String(data: data, encoding: .utf8)!)
+            } catch {
+                print(error)
+            }
+    }
+    func loadChecklistItems(){
+        print("is loading")
+        let decoder = JSONDecoder()
+        do {
+            let data = try Data(contentsOf: ChecklistViewController.dataFileUrl)
+            arrayCheckListItem = try decoder.decode([ChecklistItem].self, from: data)
+        } catch {
+            print(error)
+            
+        }
+    }
+    
+    //MARK: - USELESS
     
     @IBAction func addDummyTodo(_ sender: Any) {
     arrayCheckListItem.append(ChecklistItem(text:"Dummies",checked:true))
@@ -86,27 +122,26 @@ class ChecklistViewController: UITableViewController {
 
 //MARK: - Add Item View Controller Delegate
 
-extension ChecklistViewController: AddItemViewControllerDelegate{
-    func addItemViewControllerDidCancel(_ controller: AddItemViewController) {
+extension ChecklistViewController: ItemDetailViewControllerDelegate{
+    func itemDetailViewControllerDidCancel(_ controller: itemDetailViewController) {
         print("cancel")
         controller.dismiss(animated: true, completion: nil)
     }
     
-    func addItemViewController(_ controller: AddItemViewController, didFinishAddingItem item: ChecklistItem) {
+    func itemDetailViewController(_ controller: itemDetailViewController, didFinishAddingItem item: ChecklistItem) {
         print("Done")
         arrayCheckListItem.append(ChecklistItem(text:item.text,checked:false))
         tableView.insertRows(at: [IndexPath(row: arrayCheckListItem.count-1, section: 0)], with: .automatic)
         controller.dismiss(animated: true, completion: nil)
+        saveChecklistItems()
     }
-    func addItemViewController(_ controller: AddItemViewController, didFinishEditingItem item: ChecklistItem){
+    func itemDetailViewController(_ controller: itemDetailViewController, didFinishEditingItem item: ChecklistItem){
         print("Update")
-        print("item text",item.text)
         let test = arrayCheckListItem.index(where:{ $0 === item })
         arrayCheckListItem[test!].text = item.text
         tableView.reloadData()
         controller.dismiss(animated: true, completion: nil)
-
+        saveChecklistItems()
     }
 
 }
-
