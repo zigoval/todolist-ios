@@ -18,13 +18,44 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="ChecklistItem" id="nkU-Qf-mzm">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="ChecklistItem" id="nkU-Qf-mzm" customClass="CheckListItemCell" customModule="TodoList" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nkU-Qf-mzm" id="H3n-wd-bGw">
-                                    <rect key="frame" x="0.0" y="0.0" width="335" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="307" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="✓" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="htI-uc-NiC">
+                                            <rect key="frame" x="16" y="11" width="21" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="N1i-ku-KeR"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LcM-5M-v9S">
+                                            <rect key="frame" x="54" y="10.5" width="245" height="22.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="LcM-5M-v9S" secondAttribute="trailing" id="2vj-XC-IUN"/>
+                                        <constraint firstItem="htI-uc-NiC" firstAttribute="leading" secondItem="H3n-wd-bGw" secondAttribute="leadingMargin" id="I7i-Xv-7oF"/>
+                                        <constraint firstItem="LcM-5M-v9S" firstAttribute="leading" secondItem="htI-uc-NiC" secondAttribute="trailing" constant="8" id="NSZ-wp-dwU"/>
+                                        <constraint firstItem="LcM-5M-v9S" firstAttribute="bottom" secondItem="H3n-wd-bGw" secondAttribute="bottomMargin" id="QHa-mC-LQY"/>
+                                        <constraint firstItem="LcM-5M-v9S" firstAttribute="centerY" secondItem="H3n-wd-bGw" secondAttribute="centerY" id="ZNs-co-jxE"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="htI-uc-NiC" secondAttribute="bottom" id="iEY-sS-qSs"/>
+                                        <constraint firstItem="htI-uc-NiC" firstAttribute="top" secondItem="H3n-wd-bGw" secondAttribute="topMargin" id="tuo-dI-qOw"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="todoChecked" destination="htI-uc-NiC" id="McH-X8-CUz"/>
+                                    <outlet property="todoLabel" destination="LcM-5M-v9S" id="TAu-L0-lqm"/>
+                                    <segue destination="opR-Vv-ZWr" kind="presentation" identifier="editItem" trigger="accessoryAction" id="nPj-OE-y36"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -67,10 +98,6 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                                                    <connections>
-                                                        <action selector="done:" destination="ARU-Ij-bCk" eventType="editingDidEndOnExit" id="E5f-M7-XyB"/>
-                                                        <action selector="done:" destination="ARU-Ij-bCk" eventType="editingDidEnd" id="gLv-6N-nV3"/>
-                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -92,16 +119,17 @@
                     <navigationItem key="navigationItem" title="AddItem" id="pTO-Lu-Yqy">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="IVH-bq-9NU">
                             <connections>
-                                <action selector="cancel:" destination="ARU-Ij-bCk" id="F0E-Qp-UR4"/>
+                                <action selector="cancel" destination="ARU-Ij-bCk" id="pWm-I5-rqj"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="fdA-11-heQ">
                             <connections>
-                                <action selector="done:" destination="ARU-Ij-bCk" id="AtV-Lk-nZt"/>
+                                <action selector="done" destination="ARU-Ij-bCk" id="pzT-yB-GYy"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="btnDone" destination="fdA-11-heQ" id="gdO-xp-f2p"/>
                         <outlet property="newTodo" destination="1yp-HU-Dfj" id="37j-AK-3wp"/>
                     </connections>
                 </tableViewController>
@@ -143,7 +171,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dCq-Ur-dfp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1040.8" y="17.541229385307346"/>
+            <point key="canvasLocation" x="1130" y="-73"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="XnD-Q2-tSv"/>
+    </inferredMetricsTieBreakers>
 </document>

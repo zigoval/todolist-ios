@@ -14,6 +14,7 @@
 		08226FEB22157E69005C780A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08226FE922157E69005C780A /* LaunchScreen.storyboard */; };
 		08226FFB22159EDF005C780A /* ChecklistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08226FFA22159EDF005C780A /* ChecklistItem.swift */; };
 		08226FFD2215BD83005C780A /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08226FFC2215BD83005C780A /* AddItemViewController.swift */; };
+		08DD279E221EBEEF003C12DA /* CheckListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DD279D221EBEEF003C12DA /* CheckListItemCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		08226FEC22157E6A005C780A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08226FFA22159EDF005C780A /* ChecklistItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistItem.swift; sourceTree = "<group>"; };
 		08226FFC2215BD83005C780A /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
+		08DD279D221EBEEF003C12DA /* CheckListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListItemCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				08226FFA22159EDF005C780A /* ChecklistItem.swift */,
+				08DD279D221EBEEF003C12DA /* CheckListItemCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -167,6 +170,7 @@
 			files = (
 				08226FFD2215BD83005C780A /* AddItemViewController.swift in Sources */,
 				08226FE322157E68005C780A /* ChecklistViewController.swift in Sources */,
+				08DD279E221EBEEF003C12DA /* CheckListItemCell.swift in Sources */,
 				08226FFB22159EDF005C780A /* ChecklistItem.swift in Sources */,
 				08226FE122157E68005C780A /* AppDelegate.swift in Sources */,
 			);
