@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Checklist-->
+        <!--Name of the list-->
         <scene sceneID="YUU-2q-hDO">
             <objects>
-                <tableViewController id="yO1-Jd-LPC" customClass="ChecklistViewController" customModule="TodoList" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Name of the list" id="yO1-Jd-LPC" customClass="ChecklistViewController" customModule="TodoList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="wk8-4d-9ZE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -73,7 +73,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nfh-9w-moH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="324" y="17.541229385307346"/>
+            <point key="canvasLocation" x="167" y="-434"/>
         </scene>
         <!--AddItem-->
         <scene sceneID="pqW-Nc-Wj9">
@@ -135,7 +135,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ozY-Q5-WsJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1980" y="17.541229385307346"/>
+            <point key="canvasLocation" x="1823" y="-434"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OZX-GK-HDR">
@@ -148,12 +148,44 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="yO1-Jd-LPC" kind="relationship" relationship="rootViewController" id="phj-eA-PYJ"/>
+                        <segue destination="trV-N0-ZUi" kind="relationship" relationship="rootViewController" id="ao3-ni-gbx"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LlN-Yp-sdr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-615.20000000000005" y="17.541229385307346"/>
+            <point key="canvasLocation" x="-1518" y="-434"/>
+        </scene>
+        <!--CheckLists-->
+        <scene sceneID="wow-p2-yXA">
+            <objects>
+                <tableViewController id="trV-N0-ZUi" customClass="AllListViewController" customModule="TodoList" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="4Lg-an-h5B">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="cellForList" id="9Tc-gQ-uFu">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Tc-gQ-uFu" id="Epx-Jk-coX">
+                                    <rect key="frame" x="0.0" y="0.0" width="307" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="yO1-Jd-LPC" kind="show" id="52W-bj-NZ8"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="trV-N0-ZUi" id="Y4x-Ww-iqv"/>
+                            <outlet property="delegate" destination="trV-N0-ZUi" id="xmc-2x-Pr3"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="CheckLists" id="D9Y-Gy-0RF"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="noW-wV-MMa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-674" y="-434"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="DIy-8r-0pi">
@@ -171,7 +203,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dCq-Ur-dfp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1130" y="-73"/>
+            <point key="canvasLocation" x="980" y="-434"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
