@@ -54,7 +54,7 @@ class itemDetailViewController: UITableViewController, UITextFieldDelegate {
             return false
         }
     }
-
+    
     
     @IBAction func cancel() {
         self.delegate?.itemDetailViewControllerDidCancel(self)

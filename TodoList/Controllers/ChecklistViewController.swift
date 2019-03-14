@@ -22,10 +22,9 @@ class ChecklistViewController: UITableViewController {
     }
     
     //MARK: - Init
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.title = list.name
         
     }
@@ -34,7 +33,7 @@ class ChecklistViewController: UITableViewController {
         super.init(coder : aDecoder)
         loadChecklistItems()
     }
-
+    
     //MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -74,7 +73,7 @@ class ChecklistViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         arrayCheckListItem.remove(at: indexPath.item)
         tableView.deleteRows(at: [indexPath], with: .automatic)
-        saveChecklistItems()
+        //saveChecklistItems()
     }
     
     //MARK: - Configuration de la cellule
@@ -91,33 +90,33 @@ class ChecklistViewController: UITableViewController {
     }
     //MARK: - Codable Protocol
     
-    func saveChecklistItems(){
-        let encoder = JSONEncoder()
-            encoder.outputFormatting = .prettyPrinted
-            do {
-                let data = try encoder.encode(arrayCheckListItem)
-                try data.write(to: ChecklistViewController.dataFileUrl)
-                print(String(data: data, encoding: .utf8)!)
-            } catch {
-                print(error)
-            }
-    }
-    func loadChecklistItems(){
-        print("is loading")
-        let decoder = JSONDecoder()
-        do {
-            let data = try Data(contentsOf: ChecklistViewController.dataFileUrl)
-            arrayCheckListItem = try decoder.decode([ChecklistItem].self, from: data)
-        } catch {
-            print(error)
-            
-        }
-    }
+//    func saveChecklistItems(){
+//        let encoder = JSONEncoder()
+//        encoder.outputFormatting = .prettyPrinted
+//        do {
+//            let data = try encoder.encode(arrayCheckListItem)
+//            try data.write(to: ChecklistViewController.dataFileUrl)
+//            print(String(data: data, encoding: .utf8)!)
+//        } catch {
+//            print(error)
+//        }
+//    }
+//    func loadChecklistItems(){
+//        print("is loading")
+//        let decoder = JSONDecoder()
+//        do {
+//            let data = try Data(contentsOf: ChecklistViewController.dataFileUrl)
+//            arrayCheckListItem = try decoder.decode([ChecklistItem].self, from: data)
+//        } catch {
+//            print(error)
+//
+//        }
+//    }
     
     //MARK: - USELESS
     
     @IBAction func addDummyTodo(_ sender: Any) {
-    arrayCheckListItem.append(ChecklistItem(text:"Dummies",checked:true))
+        arrayCheckListItem.append(ChecklistItem(text:"Dummies",checked:true))
         tableView.insertRows(at: [IndexPath(row: arrayCheckListItem.count-1, section: 0)], with: .automatic)
     }
     
@@ -136,7 +135,7 @@ extension ChecklistViewController: ItemDetailViewControllerDelegate{
         arrayCheckListItem.append(ChecklistItem(text:item.text,checked:false))
         tableView.insertRows(at: [IndexPath(row: arrayCheckListItem.count-1, section: 0)], with: .automatic)
         controller.dismiss(animated: true, completion: nil)
-        saveChecklistItems()
+        //saveChecklistItems()
     }
     func itemDetailViewController(_ controller: itemDetailViewController, didFinishEditingItem item: ChecklistItem){
         print("Update")
@@ -144,7 +143,7 @@ extension ChecklistViewController: ItemDetailViewControllerDelegate{
         arrayCheckListItem[test!].text = item.text
         tableView.reloadData()
         controller.dismiss(animated: true, completion: nil)
-        saveChecklistItems()
+        //saveChecklistItems()
     }
-
+    
 }
