@@ -10,19 +10,29 @@ import UIKit
 
 class AllListViewController: UITableViewController {
     
-    var lists = [CheckList]()
-    var liste1 = CheckList(name: "Fr", item: (nil))
-    var liste2 = CheckList(name: "Eng", item: (nil))
-    var liste3 = CheckList(name: "Jp", item: (nil))
     
+    //    var liste1 = CheckList(name: "Fr", item: [ChecklistItem(text:"Riri"),ChecklistItem(text:"Fifi"),ChecklistItem(text:"Loulou")])
+    //    var liste2 = CheckList(name: "Eng", item: [ChecklistItem(text:"Huey"),ChecklistItem(text:"Dewey"),ChecklistItem(text:"Louie")])
+    //    var liste3 = CheckList(name: "Jp", item: (nil))
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder : aDecoder)
+        TodoSingleton.loadChecklist()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        lists.append(liste1)
-        lists.append(liste2)
-        lists.append(liste3)
     }
+    
+    static var documentDirectory : URL {
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    }
+    
+    static var dataFileUrl : URL {
+        return documentDirectory.appendingPathComponent("Checklists").appendingPathExtension("json")
+    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addList"
         {
@@ -33,12 +43,14 @@ class AllListViewController: UITableViewController {
         {
             let navDestVC = segue.destination as! UINavigationController
             let destVC = navDestVC.topViewController as! ListDetailViewController
-            destVC.listToEdit = lists[(tableView.indexPath(for: sender as! UITableViewCell)?.row)!]
+            destVC.listToEdit = TodoSingleton.lists[(tableView.indexPath(for: sender as! UITableViewCell)?.row)!]
             destVC.delegate = self
-        }else{
+        } else
+        {
             let destVC = segue.destination as! ChecklistViewController
+            destVC.index = (tableView.indexPath(for: sender as! UITableViewCell)?.row)!
             //let destVC = navDestVC.topViewController as! ChecklistViewController
-            destVC.list = lists[(tableView.indexPath(for: sender as! UITableViewCell)?.row)!]
+            //destVC.list = TodoSingleton.lists[(tableView.indexPath(for: sender as! UITableViewCell)?.row)!]
             // destVC.delegate = self
         }
     }
@@ -46,23 +58,20 @@ class AllListViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return lists.count
+        return TodoSingleton.lists.count
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        lists.remove(at: indexPath.item)
+        TodoSingleton.lists.remove(at: indexPath.item)
         tableView.deleteRows(at: [indexPath], with: .automatic)
-        //saveChecklistItems()
+        //TodoSingleton.saveChecklist()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)-> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellForList", for: indexPath)
-        cell.textLabel?.text = lists[indexPath.item].name
+        cell.textLabel?.text = TodoSingleton.lists[indexPath.item].name
         return cell
     }
-    
-    
-    
 }
 extension AllListViewController : ListDetailViewControllerDelegate{
     func listDetailViewControllerDidCancel(_ controller: ListDetailViewController) {
@@ -72,17 +81,19 @@ extension AllListViewController : ListDetailViewControllerDelegate{
     
     func listDetailViewController(_ controller: ListDetailViewController, didFinishAddingList item: CheckList) {
         print("Done")
-        lists.append(item)
-        tableView.insertRows(at: [IndexPath(row: lists.count-1, section: 0)], with: .automatic)
+        TodoSingleton.lists.append(item)
+        tableView.insertRows(at: [IndexPath(row: TodoSingleton.lists.count-1, section: 0)], with: .automatic)
         controller.dismiss(animated: true, completion: nil)
+        //TodoSingleton.saveChecklist()
     }
     
     func listDetailViewController(_ controller: ListDetailViewController, didFinishEditingList item: CheckList) {
         print("Update")
-        let test = lists.index(where:{ $0 === item })
-        lists[test!].name = item.name
+        let test = TodoSingleton.lists.index(where:{ $0 === item })
+        TodoSingleton.lists[test!].name = item.name
         tableView.reloadData()
         controller.dismiss(animated: true, completion: nil)
+        //TodoSingleton.saveChecklist()
     }
     
     

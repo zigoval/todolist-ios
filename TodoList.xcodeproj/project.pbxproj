@@ -14,6 +14,7 @@
 		08226FEB22157E69005C780A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08226FE922157E69005C780A /* LaunchScreen.storyboard */; };
 		08226FFB22159EDF005C780A /* ChecklistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08226FFA22159EDF005C780A /* ChecklistItem.swift */; };
 		08226FFD2215BD83005C780A /* itemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08226FFC2215BD83005C780A /* itemDetailViewController.swift */; };
+		085EEF4D223A8FEE00777E03 /* TodoSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085EEF4C223A8FEE00777E03 /* TodoSingleton.swift */; };
 		0866D78D223A405F00F5F057 /* AllListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0866D78C223A405F00F5F057 /* AllListViewController.swift */; };
 		0866D78F223A4C1600F5F057 /* CheckList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0866D78E223A4C1600F5F057 /* CheckList.swift */; };
 		0866D791223A5FD800F5F057 /* ListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0866D790223A5FD800F5F057 /* ListDetailViewController.swift */; };
@@ -30,6 +31,7 @@
 		08226FEC22157E6A005C780A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08226FFA22159EDF005C780A /* ChecklistItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistItem.swift; sourceTree = "<group>"; };
 		08226FFC2215BD83005C780A /* itemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = itemDetailViewController.swift; sourceTree = "<group>"; };
+		085EEF4C223A8FEE00777E03 /* TodoSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoSingleton.swift; sourceTree = "<group>"; };
 		0866D78C223A405F00F5F057 /* AllListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllListViewController.swift; sourceTree = "<group>"; };
 		0866D78E223A4C1600F5F057 /* CheckList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckList.swift; sourceTree = "<group>"; };
 		0866D790223A5FD800F5F057 /* ListDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				08226FF422159E24005C780A /* Models */,
 				08226FE722157E69005C780A /* Assets.xcassets */,
 				08226FEC22157E6A005C780A /* Info.plist */,
+				085EEF4C223A8FEE00777E03 /* TodoSingleton.swift */,
 			);
 			path = TodoList;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 				08226FFD2215BD83005C780A /* itemDetailViewController.swift in Sources */,
 				08226FE322157E68005C780A /* ChecklistViewController.swift in Sources */,
 				0866D78F223A4C1600F5F057 /* CheckList.swift in Sources */,
+				085EEF4D223A8FEE00777E03 /* TodoSingleton.swift in Sources */,
 				08DD279E221EBEEF003C12DA /* CheckListItemCell.swift in Sources */,
 				08226FFB22159EDF005C780A /* ChecklistItem.swift in Sources */,
 				08226FE122157E68005C780A /* AppDelegate.swift in Sources */,

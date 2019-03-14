@@ -3,7 +3,7 @@ import Foundation
 
 
 
-class CheckList {
+class CheckList : Codable {
     var name : String
     var item : [ChecklistItem]?
     
