@@ -11,6 +11,7 @@ import UIKit
 class ChecklistViewController: UITableViewController {
     
     var arrayCheckListItem = [ChecklistItem]()
+    var list: CheckList!
     
     static var documentDirectory : URL {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -24,6 +25,9 @@ class ChecklistViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = list.name
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
