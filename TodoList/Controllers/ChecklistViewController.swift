@@ -10,8 +10,7 @@ import UIKit
 
 class ChecklistViewController: UITableViewController {
     
-    var arrayCheckListItem = [ChecklistItem]()
-    var list: CheckList!
+    var arrayCheckListItem : [ChecklistItem]!
     var index : Int!
     //MARK: - Init
     
@@ -19,10 +18,6 @@ class ChecklistViewController: UITableViewController {
         super.viewDidLoad()
         print(index)
         self.title = TodoSingleton.lists[index].name
-        if(TodoSingleton.lists[index].item != nil){
-            arrayCheckListItem = TodoSingleton.lists[index].item!
-        }
-        
     }
     
     //MARK: - Navigation

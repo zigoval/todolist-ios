@@ -11,10 +11,6 @@ import UIKit
 class AllListViewController: UITableViewController {
     
     
-    //    var liste1 = CheckList(name: "Fr", item: [ChecklistItem(text:"Riri"),ChecklistItem(text:"Fifi"),ChecklistItem(text:"Loulou")])
-    //    var liste2 = CheckList(name: "Eng", item: [ChecklistItem(text:"Huey"),ChecklistItem(text:"Dewey"),ChecklistItem(text:"Louie")])
-    //    var liste3 = CheckList(name: "Jp", item: (nil))
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder : aDecoder)
         TodoSingleton.loadChecklist()
@@ -49,9 +45,7 @@ class AllListViewController: UITableViewController {
         {
             let destVC = segue.destination as! ChecklistViewController
             destVC.index = (tableView.indexPath(for: sender as! UITableViewCell)?.row)!
-            //let destVC = navDestVC.topViewController as! ChecklistViewController
-            //destVC.list = TodoSingleton.lists[(tableView.indexPath(for: sender as! UITableViewCell)?.row)!]
-            // destVC.delegate = self
+            destVC.arrayCheckListItem = TodoSingleton.lists[(tableView.indexPath(for: sender as! UITableViewCell)?.row)!].item!
         }
     }
     
@@ -64,7 +58,6 @@ class AllListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         TodoSingleton.lists.remove(at: indexPath.item)
         tableView.deleteRows(at: [indexPath], with: .automatic)
-        //TodoSingleton.saveChecklist()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)-> UITableViewCell{
@@ -84,7 +77,6 @@ extension AllListViewController : ListDetailViewControllerDelegate{
         TodoSingleton.lists.append(item)
         tableView.insertRows(at: [IndexPath(row: TodoSingleton.lists.count-1, section: 0)], with: .automatic)
         controller.dismiss(animated: true, completion: nil)
-        //TodoSingleton.saveChecklist()
     }
     
     func listDetailViewController(_ controller: ListDetailViewController, didFinishEditingList item: CheckList) {
@@ -93,7 +85,6 @@ extension AllListViewController : ListDetailViewControllerDelegate{
         TodoSingleton.lists[test!].name = item.name
         tableView.reloadData()
         controller.dismiss(animated: true, completion: nil)
-        //TodoSingleton.saveChecklist()
     }
     
     
