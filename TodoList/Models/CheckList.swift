@@ -6,10 +6,12 @@ import Foundation
 class CheckList : Codable {
     var name : String
     var item : [ChecklistItem]?
+    var icon : IconAsset
     
-    init(name:String, item:[ChecklistItem]?){
+    init(name:String, item:[ChecklistItem]?, icon:IconAsset=IconAsset.NoIcon){
         self.name = name
         self.item = item
+        self.icon = icon
     }
     
     var uncheckedItemsCount : Int{
@@ -18,6 +20,5 @@ class CheckList : Codable {
                 ChecklistItem.checked
             }).count ?? 0)
         }
-    
     }
 }

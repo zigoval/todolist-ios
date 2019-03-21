@@ -13,14 +13,6 @@ class DataModel {
     
     static var lists = [CheckList]()
     
-//    init() {
-//        NotificationCenter.default.addObserver(
-//            self,
-//            selector: #selector(DataModel.saveChecklists),
-//            forName: UIApplication.didEnterBackgroundNotification,
-//            object: nil)
-//    }
-    
     @objc static func saveChecklists(){
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted

@@ -37,7 +37,7 @@ class AllListViewController: UITableViewController {
         {
             let destVC = segue.destination as! ChecklistViewController
             destVC.index = (tableView.indexPath(for: sender as! UITableViewCell)?.row)!
-            destVC.arrayCheckListItem = DataModel.lists[(tableView.indexPath(for: sender as! UITableViewCell)?.row)!].item
+            destVC.arrayCheckListItem = DataModel.lists[(tableView.indexPath(for: sender as! UITableViewCell)?.row)!].item ?? [ChecklistItem]()
         }
     }
     
@@ -67,6 +67,7 @@ class AllListViewController: UITableViewController {
         default:
             cell.detailTextLabel?.text = "Todo : " + String(doneTask) + "/" + String(todoTask)
         }
+        cell.imageView?.image = DataModel.lists[indexPath.item].icon.image
         return cell
     }
     

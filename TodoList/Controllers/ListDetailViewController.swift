@@ -14,7 +14,9 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
     
     var delegate : ListDetailViewControllerDelegate?
     var listToEdit : CheckList?
+    @IBOutlet weak var selectedIcon: UILabel!
     
+    var newIcon : IconAsset?
     
     
     override func viewDidLoad() {
@@ -22,7 +24,15 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
         if(listToEdit != nil){
             newList.text = listToEdit!.name
             self.title = "Edit List"
+        }else{
+            newIcon = IconAsset.NoIcon
         }
+        selectedIcon.text = listToEdit?.icon.rawValue ?? IconAsset.NoIcon.rawValue
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destVC = segue.destination as! IconPickerViewController
+        destVC.delegate = self
     }
     
     @IBAction func done() {
@@ -30,7 +40,7 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
             listToEdit?.name = newList!.text!
             self.delegate?.listDetailViewController(self, didFinishEditingList: listToEdit!)
         }else{
-            self.delegate?.listDetailViewController(self, didFinishAddingList: CheckList(name: newList.text!,item: (nil)))
+            self.delegate?.listDetailViewController(self, didFinishAddingList: CheckList(name: newList.text!,item: (nil), icon : newIcon!))
         }
     }
     
@@ -39,13 +49,13 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
         super.viewWillAppear(true)
         self.newList.becomeFirstResponder()
         self.newList.addTarget(self, action: #selector(textField(_:shouldChangeCharactersIn:replacementString:)), for: UIControl.Event.editingChanged)
+        selectedIcon.text = listToEdit==nil ? newIcon!.rawValue : listToEdit?.icon.rawValue
         btnDone.isEnabled = false;
     }
     
     func textField(_ textField: UITextField,
                    shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool {
-        
         let nsString = textField.text as NSString?
         let newString = nsString?.replacingCharacters(in: range, with: string)
         if nsString?.isEqual(newString) ?? false && nsString?.isEqual(to: "") ?? false  {
@@ -66,4 +76,14 @@ protocol ListDetailViewControllerDelegate : class {
     func listDetailViewControllerDidCancel(_ controller: ListDetailViewController)
     func listDetailViewController(_ controller: ListDetailViewController, didFinishAddingList item: CheckList)
     func listDetailViewController(_ controller: ListDetailViewController, didFinishEditingList item: CheckList)
+}
+extension ListDetailViewController : IconPickerViewDelegate {
+    func listDetailViewController(_ controller: IconPickerViewController, didChooseIcon icon: IconAsset) {
+        if(listToEdit == nil){
+            newIcon = icon
+        }else{
+            listToEdit?.icon = icon
+        }
+        navigationController?.popViewController(animated: true)
+    }
 }
