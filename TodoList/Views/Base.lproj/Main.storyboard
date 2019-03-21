@@ -98,6 +98,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="isTextHasChanged:" destination="dSn-vi-wen" eventType="editingChanged" id="AFd-Fh-cQa"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>

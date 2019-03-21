@@ -12,6 +12,13 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var newList: UITextField!
     @IBOutlet weak var btnDone: UIBarButtonItem!
     
+    @IBAction func isTextHasChanged(_ sender: Any) {
+        if((newList.text?.count)!>0)
+        {
+            btnDone.isEnabled=true
+        }
+    }
+    
     var delegate : ListDetailViewControllerDelegate?
     var listToEdit : CheckList?
     @IBOutlet weak var selectedIcon: UILabel!
@@ -21,13 +28,22 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        btnDone.isEnabled = false;
         if(listToEdit != nil){
             newList.text = listToEdit!.name
             self.title = "Edit List"
         }else{
-            newIcon = IconAsset.NoIcon
+            newIcon = IconAsset.Folder
         }
-        selectedIcon.text = listToEdit?.icon.rawValue ?? IconAsset.NoIcon.rawValue
+        selectedIcon.text = listToEdit?.icon.rawValue ?? newIcon?.rawValue
+    }
+    
+    func iconHasBeenChanged(){
+        if((newList.text?.count)!>0)
+        {
+            btnDone.isEnabled=true
+            
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -48,24 +64,23 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.newList.becomeFirstResponder()
-        self.newList.addTarget(self, action: #selector(textField(_:shouldChangeCharactersIn:replacementString:)), for: UIControl.Event.editingChanged)
         selectedIcon.text = listToEdit==nil ? newIcon!.rawValue : listToEdit?.icon.rawValue
-        btnDone.isEnabled = false;
     }
     
-    func textField(_ textField: UITextField,
-                   shouldChangeCharactersIn range: NSRange,
-                   replacementString string: String) -> Bool {
-        let nsString = textField.text as NSString?
-        let newString = nsString?.replacingCharacters(in: range, with: string)
-        if nsString?.isEqual(newString) ?? false && nsString?.isEqual(to: "") ?? false  {
-            btnDone.isEnabled=false
-            return true
-        } else {
-            btnDone.isEnabled=true
-            return false
-        }
-    }
+//    func textField(_ textField: UITextField,
+//                   shouldChangeCharactersIn range: NSRange,
+//                   replacementString string: String) -> Bool {
+//        let nsString = textField.text as NSString?
+//        let newString = nsString?.replacingCharacters(in: range, with: string)
+//        if nsString?.isEqual(newString) ?? false && nsString?.isEqual(to: "") ?? false  {
+//
+//            btnDone.isEnabled=false
+//            return true
+//        } else {
+//            btnDone.isEnabled=true
+//            return false
+//        }
+//    }
     
     @IBAction func cancel() {
         self.delegate?.listDetailViewControllerDidCancel(self)
@@ -84,6 +99,7 @@ extension ListDetailViewController : IconPickerViewDelegate {
         }else{
             listToEdit?.icon = icon
         }
+        iconHasBeenChanged()
         navigationController?.popViewController(animated: true)
     }
 }
