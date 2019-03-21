@@ -7,12 +7,21 @@
 //
 
 import Foundation
+import UIKit
 
-class TodoSingleton {
+class DataModel {
     
     static var lists = [CheckList]()
     
-    static func saveChecklist(){
+//    init() {
+//        NotificationCenter.default.addObserver(
+//            self,
+//            selector: #selector(DataModel.saveChecklists),
+//            forName: UIApplication.didEnterBackgroundNotification,
+//            object: nil)
+//    }
+    
+    @objc static func saveChecklists(){
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         do {
@@ -24,7 +33,7 @@ class TodoSingleton {
         }
     }
     
-    static func loadChecklist(){
+    static func loadChecklists(){
         print("is loading")
         let decoder = JSONDecoder()
         do {

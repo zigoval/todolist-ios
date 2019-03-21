@@ -13,7 +13,7 @@ class AllListViewController: UITableViewController {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder : aDecoder)
-        TodoSingleton.loadChecklist()
+        DataModel.loadChecklists()
     }
     
     override func viewDidLoad() {
@@ -39,31 +39,45 @@ class AllListViewController: UITableViewController {
         {
             let navDestVC = segue.destination as! UINavigationController
             let destVC = navDestVC.topViewController as! ListDetailViewController
-            destVC.listToEdit = TodoSingleton.lists[(tableView.indexPath(for: sender as! UITableViewCell)?.row)!]
+            destVC.listToEdit = DataModel.lists[(tableView.indexPath(for: sender as! UITableViewCell)?.row)!]
             destVC.delegate = self
         } else
         {
             let destVC = segue.destination as! ChecklistViewController
             destVC.index = (tableView.indexPath(for: sender as! UITableViewCell)?.row)!
-            destVC.arrayCheckListItem = TodoSingleton.lists[(tableView.indexPath(for: sender as! UITableViewCell)?.row)!].item!
+            destVC.arrayCheckListItem = DataModel.lists[(tableView.indexPath(for: sender as! UITableViewCell)?.row)!].item!
         }
     }
     
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return TodoSingleton.lists.count
+        return DataModel.lists.count
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        TodoSingleton.lists.remove(at: indexPath.item)
+        DataModel.lists.remove(at: indexPath.item)
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)-> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellForList", for: indexPath)
-        cell.textLabel?.text = TodoSingleton.lists[indexPath.item].name
+        cell.textLabel?.text = DataModel.lists[indexPath.item].name
+        
+        let doneTask = DataModel.lists[indexPath.item].uncheckedItemsCount
+        let todoTask = DataModel.lists[indexPath.item].item!.count
+        let taskLeft = todoTask - doneTask
+        switch  taskLeft{
+        case 0:
+            cell.detailTextLabel?.text =  "All Done !!"
+        default:
+            cell.detailTextLabel?.text = "Todo : " + String(doneTask) + "/" + String(todoTask)
+        }
         return cell
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
     }
 }
 extension AllListViewController : ListDetailViewControllerDelegate{
@@ -74,15 +88,15 @@ extension AllListViewController : ListDetailViewControllerDelegate{
     
     func listDetailViewController(_ controller: ListDetailViewController, didFinishAddingList item: CheckList) {
         print("Done")
-        TodoSingleton.lists.append(item)
-        tableView.insertRows(at: [IndexPath(row: TodoSingleton.lists.count-1, section: 0)], with: .automatic)
+        DataModel.lists.append(item)
+        tableView.insertRows(at: [IndexPath(row: DataModel.lists.count-1, section: 0)], with: .automatic)
         controller.dismiss(animated: true, completion: nil)
     }
     
     func listDetailViewController(_ controller: ListDetailViewController, didFinishEditingList item: CheckList) {
         print("Update")
-        let test = TodoSingleton.lists.index(where:{ $0 === item })
-        TodoSingleton.lists[test!].name = item.name
+        let test = DataModel.lists.index(where:{ $0 === item })
+        DataModel.lists[test!].name = item.name
         tableView.reloadData()
         controller.dismiss(animated: true, completion: nil)
     }

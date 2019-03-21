@@ -17,7 +17,7 @@ class ChecklistViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print(index)
-        self.title = TodoSingleton.lists[index].name
+        self.title = DataModel.lists[index].name
     }
     
     //MARK: - Navigation
@@ -53,13 +53,13 @@ class ChecklistViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         arrayCheckListItem[indexPath.row].toggleChecked()
-        TodoSingleton.lists[index].item = arrayCheckListItem
+        DataModel.lists[index].item = arrayCheckListItem
         tableView.reloadRows(at: [indexPath], with: .automatic)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         arrayCheckListItem.remove(at: indexPath.item)
-        TodoSingleton.lists[index].item = arrayCheckListItem
+        DataModel.lists[index].item = arrayCheckListItem
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
@@ -93,16 +93,16 @@ extension ChecklistViewController: ItemDetailViewControllerDelegate{
     func itemDetailViewController(_ controller: itemDetailViewController, didFinishAddingItem item: ChecklistItem) {
         print("Done")
         arrayCheckListItem.append(ChecklistItem(text:item.text,checked:false))
-        TodoSingleton.lists[index].item = arrayCheckListItem
+        DataModel.lists[index].item = arrayCheckListItem
         tableView.insertRows(at: [IndexPath(row: arrayCheckListItem.count-1, section: 0)], with: .automatic)
         controller.dismiss(animated: true, completion: nil)
         
     }
     func itemDetailViewController(_ controller: itemDetailViewController, didFinishEditingItem item: ChecklistItem){
         print("Update")
-        let test = TodoSingleton.lists[index].item?.index(where:{ $0 === item })
+        let test = DataModel.lists[index].item?.index(where:{ $0 === item })
         arrayCheckListItem[test!].text = item.text
-        TodoSingleton.lists[index].item = arrayCheckListItem
+        DataModel.lists[index].item = arrayCheckListItem
         tableView.reloadData()
         controller.dismiss(animated: true, completion: nil)
     }
