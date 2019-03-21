@@ -14,18 +14,10 @@ class AllListViewController: UITableViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder : aDecoder)
         DataModel.loadChecklists()
-    }
+        DataModel.sortChecklists()    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    static var documentDirectory : URL {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-    }
-    
-    static var dataFileUrl : URL {
-        return documentDirectory.appendingPathComponent("Checklists").appendingPathExtension("json")
     }
     
     
@@ -45,7 +37,7 @@ class AllListViewController: UITableViewController {
         {
             let destVC = segue.destination as! ChecklistViewController
             destVC.index = (tableView.indexPath(for: sender as! UITableViewCell)?.row)!
-            destVC.arrayCheckListItem = DataModel.lists[(tableView.indexPath(for: sender as! UITableViewCell)?.row)!].item!
+            destVC.arrayCheckListItem = DataModel.lists[(tableView.indexPath(for: sender as! UITableViewCell)?.row)!].item
         }
     }
     
@@ -65,11 +57,13 @@ class AllListViewController: UITableViewController {
         cell.textLabel?.text = DataModel.lists[indexPath.item].name
         
         let doneTask = DataModel.lists[indexPath.item].uncheckedItemsCount
-        let todoTask = DataModel.lists[indexPath.item].item!.count
+        let todoTask = DataModel.lists[indexPath.item].item?.count ?? -1
         let taskLeft = todoTask - doneTask
         switch  taskLeft{
         case 0:
             cell.detailTextLabel?.text =  "All Done !!"
+        case -1:
+            cell.detailTextLabel?.text =  "No Task"
         default:
             cell.detailTextLabel?.text = "Todo : " + String(doneTask) + "/" + String(todoTask)
         }
@@ -89,6 +83,7 @@ extension AllListViewController : ListDetailViewControllerDelegate{
     func listDetailViewController(_ controller: ListDetailViewController, didFinishAddingList item: CheckList) {
         print("Done")
         DataModel.lists.append(item)
+        DataModel.sortChecklists()
         tableView.insertRows(at: [IndexPath(row: DataModel.lists.count-1, section: 0)], with: .automatic)
         controller.dismiss(animated: true, completion: nil)
     }
@@ -97,6 +92,7 @@ extension AllListViewController : ListDetailViewControllerDelegate{
         print("Update")
         let test = DataModel.lists.index(where:{ $0 === item })
         DataModel.lists[test!].name = item.name
+        DataModel.sortChecklists()
         tableView.reloadData()
         controller.dismiss(animated: true, completion: nil)
     }

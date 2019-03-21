@@ -10,7 +10,7 @@ import UIKit
 
 class ChecklistViewController: UITableViewController {
     
-    var arrayCheckListItem : [ChecklistItem]!
+    var arrayCheckListItem : [ChecklistItem]?
     var index : Int!
     //MARK: - Init
     
@@ -32,7 +32,7 @@ class ChecklistViewController: UITableViewController {
         {
             let navDestVC = segue.destination as! UINavigationController
             let destVC = navDestVC.topViewController as! itemDetailViewController
-            destVC.itemToEdit = arrayCheckListItem[(tableView.indexPath(for: sender as! UITableViewCell)?.row)!]
+            destVC.itemToEdit = arrayCheckListItem?[(tableView.indexPath(for: sender as! UITableViewCell)?.row)!]
             destVC.delegate = self
         }
     }

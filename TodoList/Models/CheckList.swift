@@ -16,7 +16,7 @@ class CheckList : Codable {
         get{
             return (item?.filter({ (ChecklistItem) -> Bool in
                 ChecklistItem.checked
-            }).count)!
+            }).count ?? 0)
         }
     
     }
