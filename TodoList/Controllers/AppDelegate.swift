@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        DataModel.saveChecklists()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {

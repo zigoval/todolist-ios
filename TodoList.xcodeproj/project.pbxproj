@@ -11,7 +11,6 @@
 		08226FE322157E68005C780A /* ChecklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08226FE222157E68005C780A /* ChecklistViewController.swift */; };
 		08226FE622157E68005C780A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08226FE422157E68005C780A /* Main.storyboard */; };
 		08226FE822157E69005C780A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08226FE722157E69005C780A /* Assets.xcassets */; };
-		08226FEB22157E69005C780A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08226FE922157E69005C780A /* LaunchScreen.storyboard */; };
 		08226FFB22159EDF005C780A /* ChecklistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08226FFA22159EDF005C780A /* ChecklistItem.swift */; };
 		08226FFD2215BD83005C780A /* itemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08226FFC2215BD83005C780A /* itemDetailViewController.swift */; };
 		085EEF4D223A8FEE00777E03 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085EEF4C223A8FEE00777E03 /* DataModel.swift */; };
@@ -29,7 +28,6 @@
 		08226FE222157E68005C780A /* ChecklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistViewController.swift; sourceTree = "<group>"; };
 		08226FE522157E68005C780A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		08226FE722157E69005C780A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		08226FEA22157E69005C780A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		08226FEC22157E6A005C780A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08226FFA22159EDF005C780A /* ChecklistItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistItem.swift; sourceTree = "<group>"; };
 		08226FFC2215BD83005C780A /* itemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = itemDetailViewController.swift; sourceTree = "<group>"; };
@@ -95,7 +93,6 @@
 		08226FF522159E2E005C780A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				08226FE922157E69005C780A /* LaunchScreen.storyboard */,
 				08226FE422157E68005C780A /* Main.storyboard */,
 			);
 			path = Views;
@@ -173,7 +170,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08226FEB22157E69005C780A /* LaunchScreen.storyboard in Resources */,
 				08226FE822157E69005C780A /* Assets.xcassets in Resources */,
 				08226FE622157E68005C780A /* Main.storyboard in Resources */,
 			);
@@ -209,14 +205,6 @@
 				08226FE522157E68005C780A /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		08226FE922157E69005C780A /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				08226FEA22157E69005C780A /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

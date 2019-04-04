@@ -383,4 +383,5 @@
         <segue reference="nPj-OE-y36"/>
         <segue reference="Ot3-FN-kEg"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" red="1" green="0.52120530610000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
