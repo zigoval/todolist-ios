@@ -76,10 +76,10 @@ class ChecklistViewController: UITableViewController {
     }
     //MARK: - USELESS
     
-    @IBAction func addDummyTodo(_ sender: Any) {
-        arrayCheckListItem.append(ChecklistItem(text:"Dummies",checked:true))
-        tableView.insertRows(at: [IndexPath(row: arrayCheckListItem.count-1, section: 0)], with: .automatic)
-    }
+    //    @IBAction func addDummyTodo(_ sender: Any) {
+    //        arrayCheckListItem.append(ChecklistItem(text:"Dummies",checked:true))
+    //        tableView.insertRows(at: [IndexPath(row: arrayCheckListItem.count-1, section: 0)], with: .automatic)
+    //    }
     
 }
 
@@ -93,7 +93,7 @@ extension ChecklistViewController: ItemDetailViewControllerDelegate{
     
     func itemDetailViewController(_ controller: itemDetailViewController, didFinishAddingItem item: ChecklistItem) {
         print("Done")
-        arrayCheckListItem.append(ChecklistItem(text:item.text,checked:false))
+        arrayCheckListItem.append(ChecklistItem(text:item.text))
         DataModel.shared.lists[index].item = arrayCheckListItem
         tableView.insertRows(at: [IndexPath(row: arrayCheckListItem.count-1, section: 0)], with: .automatic)
         controller.dismiss(animated: true, completion: nil)

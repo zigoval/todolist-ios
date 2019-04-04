@@ -12,14 +12,14 @@ class IconPickerViewController: UITableViewController {
     
     var icons = [IconAsset]()
     var delegate : IconPickerViewDelegate?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         icons = IconAsset.allCases
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return icons.count
     }
@@ -27,7 +27,7 @@ class IconPickerViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.delegate?.listDetailViewController(self, didChooseIcon: icons[indexPath.item])
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "imagePicker", for: indexPath)
         cell.textLabel?.text = icons[indexPath.item].rawValue
@@ -38,5 +38,5 @@ class IconPickerViewController: UITableViewController {
 
 protocol IconPickerViewDelegate : class{
     func listDetailViewController(_ controller: IconPickerViewController, didChooseIcon icon: IconAsset)
-
+    
 }

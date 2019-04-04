@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         dateComponents.hour = calendar.component(.hour, from: date)
         dateComponents.minute = calendar.component(.minute, from: date)
         dateComponents.second = calendar.component(.second, from: date)+10
-
+        
         let trigger = UNCalendarNotificationTrigger(
             dateMatching: dateComponents, repeats: true)
         
@@ -41,10 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         center.requestAuthorization(options: [.alert, .sound])
         { (granted, error) in
-            print(granted)
-            print(error ?? "noErr")
-            print(self.dateComponents)
-            
             self.notificationCenter.add(request) { (error) in
                 if error != nil {
                     print(error!)

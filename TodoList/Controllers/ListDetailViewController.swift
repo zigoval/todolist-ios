@@ -67,20 +67,20 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
         selectedIcon.text = listToEdit==nil ? newIcon!.rawValue : listToEdit?.icon.rawValue
     }
     
-//    func textField(_ textField: UITextField,
-//                   shouldChangeCharactersIn range: NSRange,
-//                   replacementString string: String) -> Bool {
-//        let nsString = textField.text as NSString?
-//        let newString = nsString?.replacingCharacters(in: range, with: string)
-//        if nsString?.isEqual(newString) ?? false && nsString?.isEqual(to: "") ?? false  {
-//
-//            btnDone.isEnabled=false
-//            return true
-//        } else {
-//            btnDone.isEnabled=true
-//            return false
-//        }
-//    }
+    //    func textField(_ textField: UITextField,
+    //                   shouldChangeCharactersIn range: NSRange,
+    //                   replacementString string: String) -> Bool {
+    //        let nsString = textField.text as NSString?
+    //        let newString = nsString?.replacingCharacters(in: range, with: string)
+    //        if nsString?.isEqual(newString) ?? false && nsString?.isEqual(to: "") ?? false  {
+    //
+    //            btnDone.isEnabled=false
+    //            return true
+    //        } else {
+    //            btnDone.isEnabled=true
+    //            return false
+    //        }
+    //    }
     
     @IBAction func cancel() {
         self.delegate?.listDetailViewControllerDidCancel(self)
