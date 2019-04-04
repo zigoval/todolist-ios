@@ -61,7 +61,6 @@ class DataModel {
         do {
             let data = try encoder.encode(self.lists)
             try data.write(to: dataFileUrl)
-            print(String(data: data, encoding: .utf8)!)
         } catch {
             print(error)
         }

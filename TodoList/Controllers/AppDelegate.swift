@@ -7,38 +7,76 @@
 //
 
 import UIKit
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+    
+    let center = UNUserNotificationCenter.current()
+    let content = UNMutableNotificationContent()
+    var dateComponents = DateComponents()
+    let date = Date() // save date, so all components use the same date
+    let calendar = Calendar.current // or e.g. Calendar(identifier: .persian)
+    let notificationCenter = UNUserNotificationCenter.current()
+    
     var window: UIWindow?
-
-
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        content.title = "Weekly Staff Meeting"
+        content.body = "Every Tuesday at 2pm"
+        
+        dateComponents.calendar = Calendar.current
+        dateComponents.day = calendar.component(.weekday, from: date)-1
+        dateComponents.hour = calendar.component(.hour, from: date)
+        dateComponents.minute = calendar.component(.minute, from: date)
+        dateComponents.second = calendar.component(.second, from: date)+10
+
+        let trigger = UNCalendarNotificationTrigger(
+            dateMatching: dateComponents, repeats: true)
+        
+        let uuidString = UUID().uuidString
+        let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger)
+        
+        center.requestAuthorization(options: [.alert, .sound])
+        { (granted, error) in
+            print(granted)
+            print(error ?? "noErr")
+            print(self.dateComponents)
+            
+            self.notificationCenter.add(request) { (error) in
+                if error != nil {
+                    print(error!)
+                }
+            }
+            
+        }
+        UNUserNotificationCenter.current().delegate = self
         return true
     }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        center.delegate = self
+        completionHandler([.alert, .badge,.sound])
     }
-
+    
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+    }
+    
     func applicationDidEnterBackground(_ application: UIApplication) {
     }
-
+    
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     }
-
+    
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
-
+    
     func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
+    
+    
 }
 

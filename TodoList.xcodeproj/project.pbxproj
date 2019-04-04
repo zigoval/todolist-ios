@@ -19,6 +19,7 @@
 		0866D791223A5FD800F5F057 /* ListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0866D790223A5FD800F5F057 /* ListDetailViewController.swift */; };
 		08741E5F2243C392003416D3 /* IconAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08741E5E2243C392003416D3 /* IconAsset.swift */; };
 		08741E612243D0DA003416D3 /* IconPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08741E602243D0DA003416D3 /* IconPickerViewController.swift */; };
+		08794F772255F52900A77207 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08794F762255F52900A77207 /* UserNotifications.framework */; };
 		08DD279E221EBEEF003C12DA /* CheckListItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DD279D221EBEEF003C12DA /* CheckListItemCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		0866D790223A5FD800F5F057 /* ListDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailViewController.swift; sourceTree = "<group>"; };
 		08741E5E2243C392003416D3 /* IconAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconAsset.swift; sourceTree = "<group>"; };
 		08741E602243D0DA003416D3 /* IconPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerViewController.swift; sourceTree = "<group>"; };
+		08794F762255F52900A77207 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		08DD279D221EBEEF003C12DA /* CheckListItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListItemCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -45,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08794F772255F52900A77207 /* UserNotifications.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +59,7 @@
 			children = (
 				08226FDF22157E68005C780A /* TodoList */,
 				08226FDE22157E68005C780A /* Products */,
+				08794F752255F52800A77207 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,6 +114,14 @@
 				08741E602243D0DA003416D3 /* IconPickerViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		08794F752255F52800A77207 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				08794F762255F52900A77207 /* UserNotifications.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
