@@ -76,7 +76,7 @@ class DataModel {
     }
     
     func sortChecklists(){
-        lists = lists.sorted(by: { $0.name < $1.name })
+        lists = lists.sorted(by: { $0.name.lowercased() < $1.name.lowercased() })
     }
     
     
